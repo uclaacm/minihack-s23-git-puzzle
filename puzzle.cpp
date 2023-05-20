@@ -25,10 +25,11 @@ string BELLO(const string& str) {
 
 string NANA(const string& word) {
   if (word.length() < 2) {
-      return "nana";} 
-      else {
-      return word.substr(0, word.length() - 2) + "nana";
-  }}
+      return "nana";
+    } else {
+        return word.substr(0, word.length() - 2) + "nana";
+    }
+}
 
 
 // findDuplicate takes in an array Bananas of how many bananas each minion
@@ -113,6 +114,18 @@ newNext->next = h2;
 return newList;
 }
 
+// sumDigits takes in the number of bananas a minion has eaten 
+// as an int and outputs the sum of all digits in that number.
+// For example, input 333 would return 9.
+int sumDigits(int Bananas) {
+  int sum = 0;
+  while (Bananas> 0){
+    sum+= Bananas % 10;
+    Bananas /= 10;
+  }
+  return sum;
+}
+
 
   int main() {
     // Test BELLO function
@@ -166,5 +179,10 @@ return newList;
     delete head2;
     delete head1;
 
-        return 0;
+    // Testing sumDigits function
+  int numBananas = 333;
+  int sum = sumDigits(numBananas);
+  cout << "Sum of digits: " << sum << endl;
+
+return 0;
 }
