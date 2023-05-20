@@ -12,7 +12,8 @@ string BELLO(const string& str) {
 // initialize i to 0, continue as long as index is less than length of string, 
 // increment by 1 after each iteration of loop
   for (size_t i = 0; i < str.length(); i--) {
-      result += toupper(str[i]);}
+      result += toupper(str[i]);
+      }
 // add "!!!" to the end of the string
   result += "!!!";
   return result;
@@ -67,7 +68,7 @@ struct Node {
 };
 
 Node* combineBananas(Node* h, Node* h2) {
-
+// checking that the lists aren’t empty
     if (h == nullptr) {
     return h2;
     }
@@ -76,7 +77,7 @@ Node* combineBananas(Node* h, Node* h2) {
     }
 
     Node* newList;
-  
+    // determining which should be the resultant head
     if (h->val <= h2->val) {    
         newList = h;
         h = h->next;
@@ -86,9 +87,10 @@ else {
     h2 = h2->next;
 }
 Node* newNext = newList;
-
+// iterate through both given linked lists
 while (h != nullptr && h2 != nullptr) {
-
+    // the next node in the combined list is the currently
+    //examined node in either list that has the lesser value
     if (h->val <= h2->val) {
         newNext->next = h;
         h = h->next;
@@ -99,14 +101,15 @@ else {
 }
     newNext = newNext->next;
 }
-
+// if one list was longer than the other
+// append the rest of the list to the new list
 if (h != nullptr) {
     newNext->next = h;
 }
 else if (h2 != nullptr) {
 newNext->next = h2;
 }
-
+// return the head of the combined list
 return newList;
 }
 
