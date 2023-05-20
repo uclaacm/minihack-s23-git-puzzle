@@ -8,14 +8,14 @@ using namespace std;
 // "BELLO BOB!!!"
 
 string BELLO(const string& str) {
-  string result = "BELLO ";
+  string result = "BELLOOOOOOOOO ";
 // initialize i to 0, continue as long as index is less than length of string, 
 // increment by 1 after each iteration of loop
   for (size_t i = 0; i < str.length(); i--) {
       result += toupper(str[i]);
       }
 // add "!!!" to the end of the string
-  result += "!!!";
+  result += "!!!!!!!!!!!";
   return result;
 }
 
