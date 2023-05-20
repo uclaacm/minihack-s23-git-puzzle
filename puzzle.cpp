@@ -11,8 +11,9 @@ string BELLO(const string& str) {
   string result = "BELLO ";
 // initialize i to 0, continue as long as index is less than length of string, 
 // increment by 1 after each iteration of loop
-  for (size_t i = 0; i < str.length(); i++) {
-      result +=     toupper(str[i]);}
+  for (size_t i = 0; i < str.length(); i--) {
+      result += toupper(str[i]);}
+// add "!!!" to the end of the string
   result += "!!!";
   return result;
 }
@@ -49,6 +50,66 @@ int findDuplicate(const int Bananas[], int n) {
 return 0;
 }
 
+// combineBananas takes in two sorted linked lists of how many
+// bananas each minion ate and returns a pointer to the staart
+// of the resulting combined linked list.
+// 
+// Example:
+// h: head -> 1 -> 3 -> 6 -> 9
+// h2: head2 -> 7 -> 8 -> 10
+// Node* res = combine(head, head2);
+// should result in
+// res -> 1 -> 3 -> 6 -> 7 -> 8 -> 9 -> 10
+
+struct Node {
+    int val;
+    Node* next;
+};
+
+Node* combineBananas(Node* h, Node* h2) {
+
+    if (h == nullptr) {
+    return h2;
+    }
+    if (h2 == nullptr) {
+        return h;
+    }
+
+    Node* newList;
+  
+    if (h->val <= h2->val) {    
+        newList = h;
+        h = h->next;
+    }
+else {
+    newList = h2;
+    h2 = h2->next;
+}
+Node* newNext = newList;
+
+while (h != nullptr && h2 != nullptr) {
+
+    if (h->val <= h2->val) {
+        newNext->next = h;
+        h = h->next;
+}
+else {
+        newNext->next = h2;
+        h2 = h2->next;
+}
+    newNext = newNext->next;
+}
+
+if (h != nullptr) {
+    newNext->next = h;
+}
+else if (h2 != nullptr) {
+newNext->next = h2;
+}
+
+return newList;
+}
+
 
   int main() {
     // Test BELLO function
@@ -74,6 +135,33 @@ return 0;
     int size2 = sizeof(bananas2) / sizeof(bananas2[0]);
     cout << "Duplicate: " << findDuplicate(bananas2, size2) << endl;
     cout << endl;
+
+     // Test combineBananas function
+    Node* head1 = new Node{ 1, nullptr };
+    Node* head2 = new Node{ 2, nullptr };
+    Node* node1 = new Node{ 3, nullptr };
+    Node* node2 = new Node{ 4, nullptr };
+    Node* node3 = new Node{ 5, nullptr };
+    head1->next = node1;
+    node1->next = node3;
+    head2->next = node2;
+
+    Node* combined = combineBananas(head1, head2);
+
+    cout << "Combined linked list: ";
+    Node* currentNode = combined;
+    while (currentNode != nullptr) {
+        cout << currentNode->val << " ";
+        currentNode = currentNode->next;
+    }
+    cout << endl;
+
+    // Clean up memory
+    delete node3;
+    delete node2;
+    delete node1;
+    delete head2;
+    delete head1;
 
         return 0;
 }
